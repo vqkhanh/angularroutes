@@ -23,7 +23,8 @@ export class GithubFollowersComponent implements OnInit {
 
       });
 
-      this.route.queryParamMap(params => {
+      this.route.queryParamMap.
+      subscribe(params => {
 
       });
 
