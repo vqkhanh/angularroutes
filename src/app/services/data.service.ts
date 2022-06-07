@@ -13,19 +13,19 @@ export class DataService {
   //url: any;
 
   getAll(url: string){
-    url = url;
-    console.log("url:",url);
+    // url = url;
+    // console.log("url:",url);
     return this.httpClient.get(url)
-    .pipe(
-      retry(3), // retry a failed request up to 3 times
-      catchError( (error: HttpErrorResponse) => {
-        return throwError(() => {
-          if(error.status === 404)
-            return throwError(() => new BadInput(error) )
-          return new AppError(error);
-        });
-      }) // then handle the error
-    );
+    // .pipe(
+    //   retry(3), // retry a failed request up to 3 times
+    //   catchError( (error: HttpErrorResponse) => {
+    //     return throwError(() => {
+    //       if(error.status === 404)
+    //         return throwError(() => new BadInput(error) )
+    //       return new AppError(error);
+    //     });
+    //   }) // then handle the error
+    // );
   }
 
   create(resource: any){
