@@ -23,27 +23,26 @@ export class GithubFollowersComponent implements OnInit {
     combineLatest([
       this.route.paramMap,
       this.route.queryParamMap
-    ]) 
-      .switchMap( combine => {
+    ])
+      .subscribe( combine => {
         let id = combine[0].get('id');
         let page = combine[1].get('page');
         // this.service.getAll({id: id, page: page})
 
-        return this.service.getAll('https://api.github.com/users/mosh-hamedani/followers')
-        
+        this.service.getAll('https://api.github.com/users/mosh-hamedani/followers')
+        .subscribe({
+          next: (res: any) => {
+            // this.display(res);
+            console.log("followers:",res);
+            this.followers = res;
+          }, // success path
+          error:(error: AppError) => {
+            if (error instanceof NotFoundError){
+              alert("Not found.");
+            }
+          }, // error path
+        });
       })
-      .subscribe({
-        next: (res: any) => {
-          // this.display(res);
-          console.log("followers:",res);
-          this.followers = res;
-        }, // success path
-        error:(error: AppError) => {
-          if (error instanceof NotFoundError){
-            alert("Not found.");
-          }
-        }, // error path
-      });
 
 
 
